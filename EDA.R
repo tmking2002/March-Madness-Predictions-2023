@@ -55,7 +55,7 @@ mens_tourney_test <- mens_tourney_results_longer %>%
 mens_tourney_train <- mens_tourney_results_longer %>% 
   filter(!(Season %in% c(2017, 2018, 2019, 2021, 2022)))
 
-rank_model_points <- glm(score_diff ~ rank_diff + rank_diff * conf_ppg_diff, data = mens_tourney_train, family = "gaussian")
+rank_model <- glm(score_diff ~ rank_diff + rank_diff * conf_ppg_diff, data = mens_tourney_train, family = "gaussian")
 point_sd <- sd(c(mens_tourney_train$WScore, mens_tourney_train$LScore))
 
 mens_tourney_test$predicted_point_diff <- predict(rank_model, mens_tourney_test, type = "response")
@@ -67,5 +67,5 @@ mean(mens_tourney_test[1:303,]$Resid)
 
 mens_submission <- mens_tourney_test %>% 
   mutate(ID = paste0(Season,"-",WTeamID,"-",LTeamID)) %>% 
-  select(ID, Pred)
+  select(ID, pred)
 

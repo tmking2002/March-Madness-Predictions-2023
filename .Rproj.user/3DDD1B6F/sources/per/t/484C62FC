@@ -1,9 +1,9 @@
 {
     "id": "484C62FC",
-    "path": "~/Projects/2023 March Madness Predictions/EDA.R",
+    "path": "~/Projects/March-Madness-Predictions-2023/EDA.R",
     "project_path": "EDA.R",
     "type": "r_source",
-    "hash": "3920830903",
+    "hash": "825399277",
     "contents": "",
     "dirty": false,
     "created": 1677606820463.0,
@@ -13,15 +13,15 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "26,0",
-        "scrollLine": "18"
+        "cursorPosition": "19,30",
+        "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1677608759,
+    "lastKnownWriteTime": 1678121289,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1677608759139,
+    "last_content_update": 1678121289,
     "read_only": false,
     "read_only_alternatives": []
 }

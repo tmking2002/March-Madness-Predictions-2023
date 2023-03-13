@@ -80,14 +80,15 @@ womens_matchups <- womens_matchups %>%
          Team2 = Var2)
 
 womens_team_data <- womens_matchups %>% 
-  merge(womens_stats, by.x = c("season","Team1"), by.y = c("Season","TeamID")) %>% 
+  merge(womens_stats, by.x = c("season","Team1"), by.y = c("Season","TeamID"), all = TRUE) %>% 
   rename(win_perc_1 = win_perc,
          margin_1 = avg_margin,
          Conf1 = ConfAbbrev) %>% 
-  merge(womens_stats, by.x = c("season","Team2"), by.y = c("Season","TeamID")) %>% 
+  merge(womens_stats, by.x = c("season","Team2"), by.y = c("Season","TeamID"), all = TRUE) %>% 
   rename(win_perc_2 = win_perc,
          margin_2 = avg_margin,
          Conf2 = ConfAbbrev) %>% 
+  drop_na(Team1, Team2) %>% 
   merge(womens_conf_stats, by.x = c("season","Conf1","Conf2"), by.y = c("Season","ConfAbbrev","opp_ConfAbbrev"), all = T) %>% 
   filter(season %in% c(2017, 2018, 2019, 2021, 2022)) %>% 
   mutate(conf_ppg_diff = ifelse(is.na(conf_ppg_diff), 0, conf_ppg_diff),
@@ -102,5 +103,8 @@ womens_submission <- womens_team_data %>%
   select(ID, pred)
 
 submission <- rbind(womens_submission, mens_submission) %>% 
-  arrange(ID)
+  arrange(ID) %>% 
+  mutate(pred = ifelse(is.na(pred), .5, pred)) %>% 
+  filter(ID %in% files$SampleSubmissionWarmup$ID)
 
+write_csv(submission, "sample_submission_2023.csv")
